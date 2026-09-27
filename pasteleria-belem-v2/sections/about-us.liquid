@@ -1,0 +1,285 @@
+<section class="belem-about-section" id="quienes-somos">
+  
+  <!-- Encabezado con imagen de fondo (Fachada de la pastelería) -->
+  <div class="belem-hero-banner">
+    <div class="belem-hero-overlay"></div>
+    <div class="belem-container belem-hero-content">
+      <span class="belem-pill-badge">Tradición familiar desde 1998</span>
+      <h2 class="belem-main-title">Quiénes Somos</h2>
+      <p class="belem-main-desc">
+        Fundada en 1998 en el municipio de Durango, <strong>Pastelería Belem</strong> nació con el propósito de llevar el auténtico sabor de la repostería artesanal y el pan recién horneado a la mesa de las familias duranguenses.
+      </p>
+      <p class="belem-sub-desc">
+        A lo largo de nuestros <strong>28 años de trayectoria</strong>, nos hemos mantenido fieles a nuestras raíces: seleccionamos cuidadosamente cada ingrediente y conservamos los procesos tradicionales que le dan a nuestros productos ese toque casero único. Para nosotros, cada pastel y cada pieza de pan representa una oportunidad de acompañar las celebraciones más especiales de nuestros clientes.
+      </p>
+    </div>
+  </div>
+
+  <div class="belem-container belem-body-content">
+    
+    <!-- Misión y Visión -->
+    <div class="belem-grid-mv">
+      <div class="belem-card belem-card-highlight">
+        <div class="belem-card-icon">🎯</div>
+        <h3 class="belem-card-title">Misión</h3>
+        <p class="belem-card-text">
+          Ofrecer productos de panadería y repostería tradicional de la más alta calidad a las familias de Durango, brindando un servicio cálido y accesible que honre nuestras raíces, fomente la unión familiar y endulce los momentos especiales de nuestros clientes.
+        </p>
+      </div>
+
+      <div class="belem-card belem-card-highlight">
+        <div class="belem-card-icon">✨</div>
+        <h3 class="belem-card-title">Visión</h3>
+        <p class="belem-card-text">
+          Ser la pastelería líder y más recomendada del estado de Durango, destacando por nuestro sazón tradicional, la excelencia en el servicio y una sólida relación de confianza con nuestros clientes y revendedores.
+        </p>
+      </div>
+    </div>
+
+    <!-- Nuestros Valores -->
+    <div class="belem-valores-block">
+      <div class="belem-section-heading">
+        <span class="belem-pill-badge">Nuestra Esencia</span>
+        <h3 class="belem-secondary-title">Nuestros Valores</h3>
+      </div>
+
+      <div class="belem-valores-grid">
+        <div class="belem-card belem-card-valor">
+          <span class="valor-pill">01</span>
+          <h4>Fe y Esperanza</h4>
+          <p>El motor que dio origen a nuestro nombre “casa del pan” y a nuestra historia.</p>
+        </div>
+
+        <div class="belem-card belem-card-valor">
+          <span class="valor-pill">02</span>
+          <h4>Unión Familiar</h4>
+          <p>El corazón de nuestro negocio, reflejado en el trato a nuestros colaboradores y clientes.</p>
+        </div>
+
+        <div class="belem-card belem-card-valor">
+          <span class="valor-pill">03</span>
+          <h4>Calidad y Tradición</h4>
+          <p>El compromiso de mantener el sabor que nos ha caracterizado durante más de dos décadas.</p>
+        </div>
+
+        <div class="belem-card belem-card-valor">
+          <span class="valor-pill">04</span>
+          <h4>Servicio Ético y Moral</h4>
+          <p>La base de nuestra relación con la comunidad, actuando siempre con honestidad y respeto.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .belem-about-section {
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #2b2b2b;
+  }
+
+  .belem-container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .belem-body-content {
+    padding: 0 20px 10px 20px;
+  }
+
+  /* Banner de Quiénes somos con la foto de fondo */
+  .belem-hero-banner {
+    position: relative;
+    background-image: url("{{ 'fachada-belem.png' | asset_url }}");
+    background-size: cover;
+    background-position: center 65%;
+    padding: 100px 24px;
+    margin-bottom: 40px;
+  }
+
+  .belem-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg, 
+      rgba(255, 255, 255, 0.4) 0%, 
+      rgba(255, 245, 247, 0.62) 50%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
+  }
+
+  .belem-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  /* Pill badge */
+  .belem-pill-badge {
+    display: inline-block;
+    background: #ffebee;
+    color: #d81b60;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(216, 27, 96, 0.1);
+  }
+
+  /* Textos con Tipografía Fluida (clamp) */
+  .belem-main-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #3b141e;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .belem-main-desc {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    line-height: 1.6;
+    color: #d81b60;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .belem-sub-desc {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    line-height: 1.65;
+    color: #4a2830;
+    margin: 0;
+  }
+
+  /* Cards generales */
+  .belem-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid #f1e4e6;
+    box-shadow: 0 10px 30px rgba(74, 21, 37, 0.04);
+    transition: all 0.25s ease;
+  }
+
+  .belem-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(74, 21, 37, 0.08);
+    border-color: #f8bbd0;
+  }
+
+  /* Grid Misión / Visión */
+  .belem-grid-mv {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-bottom: 50px;
+  }
+
+  .belem-card-highlight {
+    padding: 38px 32px;
+  }
+
+  .belem-card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+  }
+
+  .belem-card-title {
+    font-size: 1.55rem;
+    color: #3b141e;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+  }
+
+  .belem-card-text {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #555555;
+    margin: 0;
+  }
+
+  /* Valores */
+  .belem-valores-block {
+    margin-bottom: 0px;
+  }
+
+  .belem-section-heading {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  .belem-secondary-title {
+    font-size: 2.1rem;
+    color: #3b141e;
+    font-weight: 800;
+    margin: 8px 0 0 0;
+  }
+
+  .belem-valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .belem-card-valor {
+    padding: 30px 24px;
+  }
+
+  .valor-pill {
+    display: inline-block;
+    background: #fce4ec;
+    color: #c2185b;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+
+  .belem-card-valor h4 {
+    font-size: 1.18rem;
+    color: #2e1c21;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .belem-card-valor p {
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: #666;
+    margin: 0;
+  }
+
+  /* Ajustes específicos para móviles */
+  @media (max-width: 768px) {
+    .belem-hero-banner {
+      padding: 40px 16px;
+    }
+    .belem-grid-mv {
+      gap: 20px;
+    }
+    .belem-card-highlight {
+      padding: 28px 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Quiénes Somos Belem",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Quiénes Somos Belem"
+    }
+  ]
+}
+{% endschema %}

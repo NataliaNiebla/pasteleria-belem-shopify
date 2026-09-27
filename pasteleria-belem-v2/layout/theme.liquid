@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>Pastelería Belem | Repostería y Pan Tradicional en Durango</title>
+
+    <!-- Favicon forzado -->
+    <link rel="icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
+    <link rel="shortcut icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'logo-belem.png' | asset_url }}">
+
+    {% # Inlined CSS Variables %}
+    {% render 'css-variables' %}
+
+    {% unless settings.type_primary_font.system? %}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {% endunless %}
+
+    {% # Load and preload the critical CSS %}
+    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% # Social, title, etc. %}
+    {% render 'meta-tags' %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {% sections 'header-group' %}
+
+    {{ content_for_layout }}
+
+    {% sections 'footer-group' %}
+  </body>
+</html>

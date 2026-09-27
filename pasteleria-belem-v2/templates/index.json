@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "about_us": {
+      "type": "about-us",
+      "settings": {}
+    },
+    "products_catalog": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "contact_section": {
+      "type": "contact-card",
+      "settings": {}
+    }
+  },
+  "order": [
+    "about_us",
+    "products_catalog",
+    "contact_section"
+  ]
+}

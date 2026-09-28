@@ -1,14 +1,28 @@
-<!-- VENTANA MODAL SUPERPUESTA DE DETALLES -->
+<!-- VENTANA MODAL SUPERPUESTA DE DETALLES TIPO INSTAGRAM -->
 <div class="belem-modal-overlay" id="belemProductModal" onclick="closeProductModal(event)">
   <div class="belem-modal-dialog" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
     <button type="button" class="belem-modal-close" onclick="closeProductModal()" aria-label="Cerrar ventana">✕</button>
     
     <div class="belem-modal-body">
-      <div class="belem-modal-media">
-        <img id="modalProductImg" src="" alt="Detalle del producto">
+      <!-- CARRUSEL TIPO INSTAGRAM -->
+      <div class="belem-carousel-box">
+        <!-- Contador dinámico (ej. 1/3, 2/3, 3/3) -->
+        <span class="belem-ig-counter" id="belemIgCounter">1/3</span>
+
+        <!-- Contenedor con scroll táctil -->
+        <div class="belem-carousel-track" id="belemCarouselTrack">
+          <!-- Las fotos se inyectan dinámicamente aquí -->
+        </div>
+
+        <button type="button" class="belem-ig-nav prev" id="belemPrevBtn" onclick="belemSlideStep(-1)" aria-label="Foto anterior">‹</button>
+        <button type="button" class="belem-ig-nav next" id="belemNextBtn" onclick="belemSlideStep(1)" aria-label="Siguiente foto">›</button>
+
+        <!-- Indicador de bolitas estilo IG -->
+        <div class="belem-ig-dots" id="belemIgDots"></div>
         <span class="belem-modal-badge" id="modalProductBadge">Artesanal</span>
       </div>
 
+      <!-- INFORMACIÓN DEL PRODUCTO -->
       <div class="belem-modal-info">
         <span class="belem-modal-tag" id="modalProductTag">Pastelería Belem</span>
         <h3 class="belem-modal-title" id="modalProductTitle">Nombre del Producto</h3>
@@ -46,34 +60,126 @@
 </div>
 
 <script>
+  let belemCurrentIndex = 0;
+  let belemImagesList = [];
+
   function openProductModal(card) {
     if (!card) return;
 
-    const img = card.querySelector('.product-img-box img')?.getAttribute('src') || '';
-    const badge = card.querySelector('.product-badge')?.textContent || 'Recomendado';
-    const tag = card.querySelector('.product-tag')?.textContent || 'Pastelería Belem';
-    const title = card.querySelector('.product-name')?.textContent || '';
-    const desc = card.querySelector('.product-desc')?.textContent || '';
-    const prep = card.querySelector('.m-prep')?.textContent || 'Elaborado artesanalmente';
-    const extra = card.querySelector('.m-extra')?.textContent || '';
+    const track = document.getElementById('belemCarouselTrack');
+    const dotsContainer = document.getElementById('belemIgDots');
+    const counter = document.getElementById('belemIgCounter');
+    const prevBtn = document.getElementById('belemPrevBtn');
+    const nextBtn = document.getElementById('belemNextBtn');
 
-    document.getElementById('modalProductImg').src = img;
-    document.getElementById('modalProductImg').alt = title;
-    document.getElementById('modalProductBadge').textContent = badge;
-    document.getElementById('modalProductTag').textContent = tag;
+    // 1. Extraer URLs de fotos (soporta 1, 2, 3 o más fotos)
+    belemImagesList = [];
+    const attrImages = card.getAttribute('data-images');
+
+    if (attrImages) {
+      belemImagesList = attrImages.split(',').map(u => u.trim()).filter(Boolean);
+    } else {
+      // Fallback: si no pusiste data-images, busca foto 1 y deduce la 2 y 3
+      const cardImg = card.querySelector('.product-img-box img, img')?.getAttribute('src');
+      if (cardImg) {
+        belemImagesList.push(cardImg);
+        if (cardImg.match(/1\.(jpg|jpeg|png)/i)) {
+          belemImagesList.push(cardImg.replace(/1\.(jpg|jpeg|png)/i, '2.$1'));
+          belemImagesList.push(cardImg.replace(/1\.(jpg|jpeg|png)/i, '3.$1'));
+        }
+      }
+    }
+
+    belemCurrentIndex = 0;
+    track.innerHTML = '';
+    dotsContainer.innerHTML = '';
+
+    // 2. Insertar fotos en el carrusel
+    const title = (card.querySelector('.product-name')?.textContent || 'Producto').trim();
+
+    belemImagesList.forEach((src, idx) => {
+      const item = document.createElement('div');
+      item.className = 'belem-slide-item';
+      item.innerHTML = `<img src="${src}" alt="${title} foto ${idx + 1}" draggable="false" loading="lazy">`;
+      track.appendChild(item);
+
+      if (belemImagesList.length > 1) {
+        const dot = document.createElement('span');
+        dot.className = `belem-dot ${idx === 0 ? 'active' : ''}`;
+        dot.onclick = () => belemGoToSlide(idx);
+        dotsContainer.appendChild(dot);
+      }
+    });
+
+    const isMulti = belemImagesList.length > 1;
+    prevBtn.style.display = isMulti ? 'flex' : 'none';
+    nextBtn.style.display = isMulti ? 'flex' : 'none';
+    dotsContainer.style.display = isMulti ? 'flex' : 'none';
+    counter.style.display = isMulti ? 'block' : 'none';
+
+    track.scrollLeft = 0;
+    belemUpdateNav(0);
+
+    // 3. Pasar textos informativos
+    document.getElementById('modalProductBadge').textContent = card.querySelector('.product-badge')?.textContent || 'Artesanal';
+    document.getElementById('modalProductTag').textContent = card.querySelector('.product-tag')?.textContent || 'Pastelería Belem';
     document.getElementById('modalProductTitle').textContent = title;
-    document.getElementById('modalProductDesc').textContent = desc;
-    document.getElementById('modalProductPrep').textContent = prep;
-    document.getElementById('modalProductExtra').textContent = extra;
+    document.getElementById('modalProductDesc').textContent = card.querySelector('.product-desc')?.textContent || '';
+    document.getElementById('modalProductPrep').textContent = card.querySelector('.m-prep')?.textContent || 'Receta Tradicional';
+    document.getElementById('modalProductExtra').textContent = card.querySelector('.m-extra')?.textContent || '';
 
     const phone = '526181891859';
     const msg = encodeURIComponent(`Hola Pastelería Belem, me gustaría hacer un pedido de: ${title}. ¿Tienen disponibilidad hoy?`);
     document.getElementById('modalProductWhatsappBtn').href = `https://wa.me/${phone}?text=${msg}`;
 
+    // Mostrar modal
     const modal = document.getElementById('belemProductModal');
     modal.classList.add('is-active');
     document.body.style.overflow = 'hidden';
   }
+
+  // Funciones de navegación tipo Instagram
+  function belemSlideStep(direction) {
+    const track = document.getElementById('belemCarouselTrack');
+    const width = track.clientWidth;
+    track.scrollBy({ left: direction * width, behavior: 'smooth' });
+  }
+
+  function belemGoToSlide(index) {
+    const track = document.getElementById('belemCarouselTrack');
+    const width = track.clientWidth;
+    track.scrollTo({ left: index * width, behavior: 'smooth' });
+  }
+
+  function belemUpdateNav(index) {
+    belemCurrentIndex = index;
+    const counter = document.getElementById('belemIgCounter');
+    const dots = document.querySelectorAll('.belem-dot');
+
+    if (counter && belemImagesList.length > 1) {
+      counter.textContent = `${index + 1}/${belemImagesList.length}`;
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === index);
+    });
+  }
+
+  // Listener para el swipe táctil o arrastre con ratón
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('belemCarouselTrack');
+    if (!track) return;
+
+    track.addEventListener('scroll', () => {
+      const width = track.clientWidth;
+      if (width > 0) {
+        const newIndex = Math.round(track.scrollLeft / width);
+        if (newIndex !== belemCurrentIndex && newIndex >= 0 && newIndex < belemImagesList.length) {
+          belemUpdateNav(newIndex);
+        }
+      }
+    });
+  });
 
   function closeProductModal(event) {
     if (event && event.target && !event.target.classList.contains('belem-modal-overlay') && !event.target.classList.contains('belem-modal-close')) {
@@ -85,11 +191,11 @@
   }
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('belemProductModal');
-      if (modal && modal.classList.contains('is-active')) {
-        closeProductModal();
-      }
+    const modal = document.getElementById('belemProductModal');
+    if (modal && modal.classList.contains('is-active')) {
+      if (e.key === 'Escape') closeProductModal();
+      if (e.key === 'ArrowRight') belemSlideStep(1);
+      if (e.key === 'ArrowLeft') belemSlideStep(-1);
     }
   });
 </script>
@@ -110,9 +216,9 @@
 
   .belem-modal-dialog {
     position: relative; background: #ffffff; border-radius: 28px;
-    width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto;
+    width: 100%; max-width: 880px; max-height: 90vh; overflow-y: auto;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    transform: scale(0.92) translateY(20px);
+    transform: scale(0.94) translateY(20px);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid #fae1e6;
   }
@@ -123,15 +229,126 @@
     position: absolute; top: 16px; right: 18px; width: 38px; height: 38px;
     border-radius: 50%; background-color: #ffffff; border: 1px solid #f0d0d8;
     color: #4a1525; font-size: 1.1rem; font-weight: 800; display: flex;
-    align-items: center; justify-content: center; cursor: pointer; z-index: 10;
+    align-items: center; justify-content: center; cursor: pointer; z-index: 40;
     transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   .belem-modal-close:hover { background-color: #d81b60; color: #ffffff; border-color: #d81b60; transform: rotate(90deg); }
   .belem-modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-  .belem-modal-media { position: relative; background-color: #fff0f3; min-height: 380px; overflow: hidden; }
-  .belem-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .belem-modal-badge { position: absolute; top: 18px; left: 18px; background: #d81b60; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 5px 14px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35); }
+
+  /* CAJA DEL CARRUSEL TIPO INSTAGRAM */
+  .belem-carousel-box {
+    position: relative;
+    background-color: #fff0f3;
+    min-height: 380px;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .belem-carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .belem-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .belem-slide-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .belem-slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  /* Contador dinámico (1/2, 1/3, etc.) */
+  .belem-ig-counter {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+  }
+
+  /* Flechas de navegación */
+  .belem-ig-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    border: none;
+    color: #3b141e;
+    font-size: 1.7rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .belem-ig-nav:hover { background: #ffffff; transform: translateY(-50%) scale(1.1); }
+  .belem-ig-nav.prev { left: 12px; }
+  .belem-ig-nav.next { right: 12px; }
+
+  /* Indicadores de bolitas */
+  .belem-ig-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 20;
+  }
+
+  .belem-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .belem-dot.active {
+    background: #d81b60;
+    transform: scale(1.4);
+    box-shadow: 0 0 6px rgba(216, 27, 96, 0.5);
+  }
+
+  .belem-modal-badge { position: absolute; top: 18px; left: 18px; background: #d81b60; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 5px 14px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35); z-index: 10; }
   .belem-modal-info { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; }
   .belem-modal-tag { font-size: 0.8rem; text-transform: uppercase; color: #ad1457; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 6px; }
   .belem-modal-title { font-size: 1.95rem; color: #3b141e; font-weight: 900; margin: 0 0 10px 0; line-height: 1.2; }
@@ -148,9 +365,11 @@
 
   @media (max-width: 768px) {
     .belem-modal-body { grid-template-columns: 1fr; }
-    .belem-modal-media { min-height: 240px; max-height: 280px; }
+    .belem-carousel-box { min-height: 280px; max-height: 320px; }
+    .belem-slide-item { min-height: 280px; }
     .belem-modal-info { padding: 24px 20px; }
     .belem-modal-title { font-size: 1.55rem; }
     .belem-modal-meta-box { flex-direction: column; gap: 10px; }
+    .belem-ig-nav { display: none !important; }
   }
 </style>

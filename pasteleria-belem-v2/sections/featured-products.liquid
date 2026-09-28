@@ -325,7 +325,7 @@
 {% render 'product-modal' %}
 
 <script>
-  /* Función para filtrar tarjetas por categoría */
+  /* Filtro de tarjetas por categoría */
   function filterProducts(category, btn) {
     const cards = document.querySelectorAll('.product-card');
     const buttons = document.querySelectorAll('.filter-btn');
@@ -342,26 +342,41 @@
     });
   }
 
-  /* Controlador SPA multiventana */
-  window.switchToBelemView = function(view) {
+  /* Controlador SPA centralizado con soporte de historial */
+  window.switchToBelemView = function(view, updateHistory = true) {
     document.body.classList.remove('view-especialidades', 'view-promociones');
 
     if (view === 'especialidades') {
       document.body.classList.add('view-especialidades');
-      window.location.hash = 'especialidades';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (updateHistory && window.location.hash !== '#especialidades') {
+        history.pushState({ view: 'especialidades' }, '', '#especialidades');
+      }
     } else if (view === 'promociones') {
       document.body.classList.add('view-promociones');
-      window.location.hash = 'promociones';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (updateHistory && window.location.hash !== '#promociones') {
+        history.pushState({ view: 'promociones' }, '', '#promociones');
+      }
     } else {
-      history.pushState("", document.title, window.location.pathname + window.location.search);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (updateHistory && window.location.hash !== '') {
+        history.pushState({ view: 'home' }, '', window.location.pathname + window.location.search);
+      }
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  /* Escuchar el botón "Atrás" y "Adelante" del navegador o celular */
+  window.addEventListener('popstate', function() {
+    if (window.location.hash === '#especialidades') {
+      window.switchToBelemView('especialidades', false);
+    } else if (window.location.hash === '#promociones') {
+      window.switchToBelemView('promociones', false);
+    } else {
+      window.switchToBelemView('home', false);
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
-    // Escuchar enlaces hacia Especialidades
+    // Enlaces a Especialidades
     document.querySelectorAll('a[href="#especialidades"], a[href="#menu-productos"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -369,7 +384,7 @@
       });
     });
 
-    // Escuchar enlaces hacia Promociones
+    // Enlaces a Promociones
     document.querySelectorAll('a[href="#promociones"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -377,11 +392,11 @@
       });
     });
 
-    // Detectar si carga con hash en la URL
+    // Sincronización al cargar la URL directa con hash
     if (window.location.hash === '#especialidades') {
-      window.switchToBelemView('especialidades');
+      window.switchToBelemView('especialidades', false);
     } else if (window.location.hash === '#promociones') {
-      window.switchToBelemView('promociones');
+      window.switchToBelemView('promociones', false);
     }
   });
 </script>

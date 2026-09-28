@@ -1,57 +1,336 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+<footer class="belem-footer-wrapper">
+  <div class="belem-footer-container">
+    
+    <!-- Columna 1: Identidad y Reseña -->
+    <div class="footer-col brand-col">
+      <div class="footer-brand-header">
+        <img 
+          src="{{ 'logo-belem.png' | asset_url }}" 
+          alt="Pastelería Belem" 
+          class="footer-logo-img"
+          width="48"
+          height="48"
+          loading="lazy"
+        >
+        <span class="footer-brand-title">Pastelería Belem</span>
+      </div>
+      <p class="footer-tagline">Tradición duranguense desde 1998</p>
+      <p class="footer-desc">
+        Más de 25 años endulzando las mesas de las familias en Durango con repostería artesanal, pan recién horneado e ingredientes seleccionados de la más alta calidad.
+      </p>
+    </div>
+
+    <!-- Columna 2: Enlaces Rápidos (Integrados con la navegación SPA) -->
+    <div class="footer-col links-col">
+      <h3 class="footer-heading">Navegación</h3>
+      <ul class="footer-links-list">
+        <li>
+          <a href="#" onclick="if(window.switchToBelemView){ switchToBelemView('home'); } return false;">
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a href="#quienes-somos" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
+            Quiénes Somos
+          </a>
+        </li>
+        <li>
+          <a href="#especialidades" onclick="if(window.switchToBelemView){ switchToBelemView('especialidades'); } return false;">
+            Especialidades
+          </a>
+        </li>
+        <li>
+          <a href="#promociones" onclick="if(window.switchToBelemView){ switchToBelemView('promociones'); } return false;">
+            Promociones de Temporada
+          </a>
+        </li>
+        <li>
+          <a href="#contacto" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
+            Contacto y Ubicación
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Horarios y Ubicación -->
+    <div class="footer-col hours-col">
+      <h3 class="footer-heading">Sucursal Durango</h3>
+      <div class="footer-info-item">
+        <span class="info-icon">📍</span>
+        <p>Durango, Dgo., México.<br><small>Servicio para llevar y pedidos especiales.</small></p>
+      </div>
+      <div class="footer-info-item">
+        <span class="info-icon">🕒</span>
+        <div>
+          <p><strong>Lunes a Sábado:</strong> 8:00 AM – 8:30 PM</p>
+          <p><strong>Domingos:</strong> 9:00 AM – 4:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna 4: Canal de Pedidos (WhatsApp Directo) -->
+    <div class="footer-col cta-col">
+      <h3 class="footer-heading">Atención y Pedidos</h3>
+      <p class="footer-cta-text">
+        ¿Tienes un evento en puerta o deseas apartar un pastel del día? Escríbenos directamente:
+      </p>
+      <a 
+        href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20hacer%20un%20pedido" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="footer-whatsapp-btn"
+      >
+        <span class="btn-icon">💬</span>
+        <span>Pedir por WhatsApp</span>
+      </a>
+      <span class="footer-phone-label">Tel / WhatsApp: +52 (618) 189-1859</span>
+    </div>
+
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+  <!-- Barra Inferior de Derechos -->
+  <div class="belem-footer-bottom">
+    <div class="footer-bottom-container">
+      <p>© {{ 'now' | date: '%Y' }} Pastelería Belem. Todos los derechos reservados.</p>
+      <p class="bottom-credit">Horneado con dedicación en Durango.</p>
+    </div>
   </div>
 </footer>
 
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+<style>
+  .belem-footer-wrapper {
+    background: linear-gradient(180deg, #3b141e 0%, #260a12 100%);
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding-top: 60px;
+    border-top: 4px solid #d81b60;
 
-{% schema %}
-{
-  "name": "t:general.footer",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
+    /* Forzar que rompa cualquier contenedor y toque los bordes físicos de la pantalla */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .belem-footer-container {
+    width: 94% !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding: 50px 20px 50px 20px !important;
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr 1.2fr 1.2fr !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Columna Marca */
+  .footer-brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .footer-logo-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #f8bbd0;
+    object-fit: contain;
+    padding: 2px;
+  }
+
+  .footer-brand-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #f48fb1;
+    margin: 0 0 12px 0;
+  }
+
+  .footer-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #f1d7dc;
+    margin: 0;
+  }
+
+  /* Títulos de sección */
+  .footer-heading {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 18px 0;
+    position: relative;
+    padding-bottom: 8px;
+  }
+
+  .footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background-color: #d81b60;
+    border-radius: 2px;
+  }
+
+  /* Lista de Enlaces */
+  .footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links-list a {
+    color: #f1d7dc;
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .footer-links-list a:hover {
+    color: #ffffff;
+    transform: translateX(4px);
+  }
+
+  /* Info de Contacto / Horarios */
+  .footer-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: #f1d7dc;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .footer-info-item p {
+    margin: 0;
+  }
+
+  .footer-info-item small {
+    color: #e0b0b8;
+  }
+
+  .info-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  /* Botón CTA Pedidos */
+  .footer-cta-text {
+    font-size: 0.92rem;
+    color: #f1d7dc;
+    line-height: 1.55;
+    margin: 0 0 16px 0;
+  }
+
+  .footer-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #25d366;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+    transition: all 0.25s ease;
+    margin-bottom: 12px;
+    align-self: flex-start;
+  }
+
+  .footer-whatsapp-btn:hover {
+    background-color: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+
+  .footer-phone-label {
+    font-size: 0.82rem;
+    color: #f48fb1;
+    font-weight: 600;
+  }
+
+  /* Barra de Copyright */
+  .belem-footer-bottom {
+    background: rgba(18, 4, 8, 0.65);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 0;
+    width: 100% !important;
+  }
+
+  .footer-bottom-container {
+    width: 94% !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.84rem;
+    color: #c9a7ae;
+    box-sizing: border-box !important;
+  }
+
+  .footer-bottom-container p {
+    margin: 0;
+  }
+
+  .bottom-credit {
+    font-style: italic;
+  }
+
+  /* Responsivo */
+  @media (max-width: 1024px) {
+    .belem-footer-container {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 36px !important;
     }
-  ]
-}
-{% endschema %}
+  }
+
+  @media (max-width: 640px) {
+    .belem-footer-container {
+      grid-template-columns: 1fr !important;
+      gap: 30px !important;
+    }
+    .footer-bottom-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

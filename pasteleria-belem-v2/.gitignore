@@ -21,3 +21,6 @@ release
 .env.*
 *.env
 shopify.theme.yml
+
+*.~tmp
+*.tmp

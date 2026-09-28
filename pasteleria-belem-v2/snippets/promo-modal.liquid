@@ -1,0 +1,293 @@
+<!-- VENTANA MODAL SUPERPUESTA DE PROMOCIONES -->
+<div class="belem-promo-modal-overlay" id="belemPromoModal" onclick="closePromoModal(event)">
+  <div class="belem-promo-modal-dialog" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+    <button type="button" class="belem-promo-modal-close" onclick="closePromoModal()" aria-label="Cerrar ventana">✕</button>
+    
+    <div class="belem-promo-modal-body">
+      <div class="belem-promo-modal-media">
+        <img id="modalPromoImg" src="" alt="Detalle de la promoción">
+        <span class="belem-promo-modal-ribbon" id="modalPromoRibbon">Oferta Especial</span>
+      </div>
+
+      <div class="belem-promo-modal-info">
+        <span class="belem-promo-modal-tag" id="modalPromoTag">Promoción Belem</span>
+        <h3 class="belem-promo-modal-title" id="modalPromoTitle">Título de la Promoción</h3>
+        
+        <p class="belem-promo-modal-desc" id="modalPromoDesc"></p>
+
+        <div class="belem-promo-modal-benefits-box">
+          <h4>¿Qué incluye este paquete?</h4>
+          <ul id="modalPromoBenefitsList"></ul>
+        </div>
+
+        <div class="belem-promo-modal-conditions" id="modalPromoConditions">
+          <span>* Válido ordenando directamente con nosotros. No acumulable con otras ofertas.</span>
+        </div>
+
+        <div class="belem-promo-modal-actions">
+          <a href="#" target="_blank" class="btn-promo-modal-whatsapp" id="modalPromoWhatsappBtn">
+            Aprovechar esta Promoción por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openPromoModal(card) {
+    if (!card) return;
+
+    const img = card.querySelector('.promo-img-box img')?.getAttribute('src') || '';
+    const ribbon = card.querySelector('.promo-badge-ribbon')?.textContent || 'Promoción';
+    const tag = card.querySelector('.promo-tag')?.textContent || 'Paquete Especial';
+    const title = card.querySelector('.promo-title')?.textContent || '';
+    const desc = card.querySelector('.promo-desc')?.textContent || '';
+    const note = card.querySelector('.promo-note')?.textContent || 'Consulta términos y condiciones.';
+    
+    // Extraer lista de beneficios
+    const benefitItems = card.querySelectorAll('.promo-benefits li');
+    const benefitsList = document.getElementById('modalPromoBenefitsList');
+    benefitsList.innerHTML = '';
+    benefitItems.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item.textContent;
+      benefitsList.appendChild(li);
+    });
+
+    document.getElementById('modalPromoImg').src = img;
+    document.getElementById('modalPromoImg').alt = title;
+    document.getElementById('modalPromoRibbon').textContent = ribbon;
+    document.getElementById('modalPromoTag').textContent = tag;
+    document.getElementById('modalPromoTitle').textContent = title;
+    document.getElementById('modalPromoDesc').textContent = desc;
+    document.getElementById('modalPromoConditions').innerHTML = `<span>* Vigencia: ${note}. Sujeto a disponibilidad de ingredientes del día.</span>`;
+
+    // Mensaje preconfigurado para WhatsApp
+    const phone = '526181891859';
+    const msg = encodeURIComponent(`Hola Pastelería Belem, me interesa ordenar la promoción: "${title}". ¿Me podrían brindar más información sobre la disponibilidad?`);
+    document.getElementById('modalPromoWhatsappBtn').href = `https://wa.me/${phone}?text=${msg}`;
+
+    const modal = document.getElementById('belemPromoModal');
+    modal.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePromoModal(event) {
+    if (event && event.target && !event.target.classList.contains('belem-promo-modal-overlay') && !event.target.classList.contains('belem-promo-modal-close')) {
+      return;
+    }
+    const modal = document.getElementById('belemPromoModal');
+    modal.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('belemPromoModal');
+      if (modal && modal.classList.contains('is-active')) {
+        closePromoModal();
+      }
+    }
+  });
+</script>
+
+<style>
+  .belem-promo-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(43, 14, 23, 0.68);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px; box-sizing: border-box;
+  }
+
+  .belem-promo-modal-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .belem-promo-modal-dialog {
+    position: relative;
+    background: #ffffff;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 880px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #fae1e6;
+  }
+
+  .belem-promo-modal-overlay.is-active .belem-promo-modal-dialog {
+    transform: scale(1) translateY(0);
+  }
+
+  .belem-promo-modal-close {
+    position: absolute;
+    top: 16px; right: 18px;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid #f0d0d8;
+    color: #4a1525;
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .belem-promo-modal-close:hover {
+    background-color: #d81b60;
+    color: #ffffff;
+    border-color: #d81b60;
+    transform: rotate(90deg);
+  }
+
+  .belem-promo-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .belem-promo-modal-media {
+    position: relative;
+    background-color: #fff0f3;
+    min-height: 380px;
+    overflow: hidden;
+  }
+
+  .belem-promo-modal-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .belem-promo-modal-ribbon {
+    position: absolute;
+    top: 18px; left: 18px;
+    background: #d81b60;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35);
+  }
+
+  .belem-promo-modal-info {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .belem-promo-modal-tag {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #ad1457;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 6px;
+  }
+
+  .belem-promo-modal-title {
+    font-size: 1.85rem;
+    color: #3b141e;
+    font-weight: 900;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+
+  .belem-promo-modal-desc {
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: #444444;
+    margin: 0 0 18px 0;
+  }
+
+  .belem-promo-modal-benefits-box {
+    background: #fffafa;
+    border: 1px solid #f8e6ea;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .belem-promo-modal-benefits-box h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.88rem;
+    color: #7d1234;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .belem-promo-modal-benefits-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88rem;
+    color: #333333;
+  }
+
+  .belem-promo-modal-conditions {
+    font-size: 0.76rem;
+    color: #888888;
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+
+  .btn-promo-modal-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #25d366;
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 14px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+    transition: all 0.25s ease;
+    text-align: center;
+  }
+
+  .btn-promo-modal-whatsapp:hover {
+    background-color: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  }
+
+  @media (max-width: 768px) {
+    .belem-promo-modal-body {
+      grid-template-columns: 1fr;
+    }
+    .belem-promo-modal-media {
+      min-height: 220px;
+      max-height: 260px;
+    }
+    .belem-promo-modal-info {
+      padding: 24px 20px;
+    }
+    .belem-promo-modal-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

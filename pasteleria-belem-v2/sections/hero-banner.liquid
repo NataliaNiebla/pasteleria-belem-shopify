@@ -1,0 +1,263 @@
+<section class="belem-hero-main">
+  <div class="belem-hero-wrapper">
+    
+    <!-- Lado Izquierdo: Pastel Principal en Círculo Grande -->
+    <div class="hero-showcase-left">
+      <div class="circle-frame circle-large">
+        <img 
+          src="{{ 'chococake1.jpg' | asset_url }}" 
+          alt="Pastel de Chocolate Artesanal Belem"
+          loading="eager"
+        >
+      </div>
+    </div>
+
+    <!-- Centro: Titular, Eslogan y Botón CTA -->
+    <div class="hero-center-content">
+      <span class="hero-badge">Sabor & Tradición en Durango</span>
+      <h1 class="hero-headline">
+        EL ARTE DE ENDULZAR <br><span>TUS MOMENTOS</span>
+      </h1>
+      <p class="hero-tagline">
+        Recetas caseras, panadería artesanal recién horneada y la pasión de una familia duranguense desde 1998.
+      </p>
+      
+      <div class="hero-actions">
+        
+        <a href="#especialidades" class="belem-hero-btn primary-btn">
+            Ver Especialidades
+        </a>
+      </div>
+    </div>
+
+    <!-- Lado Derecho: Dos Círculos de Productos Estrella -->
+    <div class="hero-showcase-right">
+      <div class="circle-frame circle-small">
+        <img 
+          src="{{ 'pasteldefresapremium.jpeg' | asset_url }}" 
+          alt="Pastel de Fresas con Crema"
+          loading="lazy"
+        >
+      </div>
+      <div class="circle-frame circle-small">
+        <img 
+          src="{{ 'PastelAleman1.jpeg' | asset_url }}" 
+          alt="Especialidad Frutos Rojos"
+          loading="lazy"
+        >
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pestaña / Curva inferior decorativa que conecta con Quiénes Somos -->
+
+</section>
+
+<style>
+  .belem-hero-main {
+    position: relative;
+    background: linear-gradient(135deg, #e85a84 0%, #c73765 50%, #741330 100%);
+    color: #ffffff;
+    padding: 110px 24px 110px 24px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Forzar ancho completo de borde a borde (Breakout 100vw) */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .belem-hero-wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Círculo Principal Izquierdo */
+  .hero-showcase-left {
+    flex: 1 1 320px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .circle-frame {
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    background-color: #ffffff;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .circle-frame:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  }
+
+  .circle-large {
+    width: clamp(260px, 26vw, 360px);
+    height: clamp(260px, 26vw, 360px);
+  }
+
+  .circle-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Centro Textual */
+  .hero-center-content {
+    flex: 2 1 480px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    color: #ffe6ee;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .hero-headline {
+    font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin: 0 0 16px 0;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-headline span {
+    color: #ffb8cc;
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.98rem, 1.8vw, 1.18rem);
+    color: #fce4ec;
+    line-height: 1.6;
+    margin: 0 auto 28px auto;
+    max-width: 540px;
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .belem-hero-btn {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 13px 28px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .primary-btn {
+    background-color: #ffffff;
+    color: #7d1234 !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+  }
+
+  .primary-btn:hover {
+    background-color: #ffeef3;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  .secondary-btn {
+    background-color: transparent;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+  }
+
+  .secondary-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* Lado Derecho: Dos círculos apilados */
+  .hero-showcase-right {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+  }
+
+  .circle-small {
+    width: clamp(130px, 13vw, 175px);
+    height: clamp(130px, 13vw, 175px);
+    border-width: 5px;
+  }
+
+  /* Responsivo para Tablets y Celulares */
+  @media (max-width: 992px) {
+    .belem-hero-main {
+      padding: 50px 18px 80px 18px;
+    }
+
+    .belem-hero-wrapper {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .hero-showcase-right {
+      flex-direction: row;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .circle-small {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero-showcase-right {
+      display: none; /* Ocultar burbujas secundarias en pantallas muy chicas para no saturar */
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Banner Principal",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Hero Banner Principal"
+    }
+  ]
+}
+{% endschema %}

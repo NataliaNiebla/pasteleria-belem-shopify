@@ -1,105 +1,64 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Favicon oficial de Pastelería Belem -->
+<link rel="icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
+<link rel="shortcut icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
+<link rel="apple-touch-icon" href="{{ 'logo-belem.png' | asset_url }}">
+
+<link rel="canonical" href="{{ canonical_url }}">
 
 {%- liquid
-  assign og_title = page_title | default: shop.name
-  assign og_url = canonical_url | default: request.origin
-  assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign belem_brand = 'Pastelería Belem'
+  assign belem_default_title = 'Pastelería Belem | Repostería y Pan Tradicional en Durango'
+  assign belem_default_desc = 'Pastelería artesanal y pan recién horneado en Durango desde 1998. Especialidades en repostería tradicional, pays, pasteles y pedidos para eventos.'
 
+  if request.page_type == 'index'
+    assign meta_title = belem_default_title
+  else
+    assign meta_title = page_title | append: ' &ndash; ' | append: belem_brand
+  endif
+
+  assign meta_description = page_description | default: belem_default_desc
+
+  assign og_type = 'website'
   if request.page_type == 'product'
     assign og_type = 'product'
   elsif request.page_type == 'article'
     assign og_type = 'article'
-  elsif request.page_type == 'password'
-    assign og_url = request.origin
   endif
 %}
 
-<meta
-  property="og:site_name"
-  content="{{ shop.name }}"
->
-<meta
-  property="og:url"
-  content="{{ og_url }}"
->
-<meta
-  property="og:title"
-  content="{{ og_title | escape }}"
->
-<meta
-  property="og:type"
-  content="{{ og_type }}"
->
-<meta
-  property="og:description"
-  content="{{ og_description | escape }}"
->
+<!-- Título de la pestaña -->
+<title>{{ meta_title }}</title>
+<meta name="description" content="{{ meta_description | escape }}">
+
+<!-- Open Graph / Meta etiquetas para compartir (WhatsApp, Facebook, etc.) -->
+<meta property="og:site_name" content="{{ belem_brand }}">
+<meta property="og:url" content="{{ canonical_url | default: request.origin }}">
+<meta property="og:title" content="{{ meta_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ meta_description | escape }}">
 
 {%- if page_image -%}
-  <meta
-    property="og:image"
-    content="http:{{ page_image | image_url }}"
-  >
-  <meta
-    property="og:image:secure_url"
-    content="https:{{ page_image | image_url }}"
-  >
-  <meta
-    property="og:image:width"
-    content="{{ page_image.width }}"
-  >
-  <meta
-    property="og:image:height"
-    content="{{ page_image.height }}"
-  >
+  <meta property="og:image" content="http:{{ page_image | image_url }}">
+  <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
+{%- else -%}
+  <meta property="og:image" content="http:{{ 'logo-belem.png' | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ 'logo-belem.png' | asset_url }}">
+{%- endif -%}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title | escape }}">
+<meta name="twitter:description" content="{{ meta_description | escape }}">
+{%- if page_image -%}
+  <meta name="twitter:image" content="https:{{ page_image | image_url }}">
+{%- else -%}
+  <meta name="twitter:image" content="https:{{ 'logo-belem.png' | asset_url }}">
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
   <script type="application/ld+json">
     {{ product | structured_data }}
   </script>
-
-  <meta
-    property="og:price:amount"
-    content="{{ product.price | money_without_currency | strip_html }}"
-  >
-  <meta
-    property="og:price:currency"
-    content="{{ cart.currency.iso_code }}"
-  >
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {%- endif -%}
-
-<meta
-  name="twitter:card"
-  content="summary_large_image"
->
-<meta
-  name="twitter:title"
-  content="{{ og_title | escape }}"
->
-<meta
-  name="twitter:description"
-  content="{{ og_description | escape }}"
->
-
-<title>
-  {{ page_title }}
-  {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-</title>
-
-<link
-  rel="canonical"
-  href="{{ canonical_url }}"
->
-
-{% if page_description %}
-  <meta
-    name="description"
-    content="{{ page_description | escape }}"
-  >
-{% endif %}

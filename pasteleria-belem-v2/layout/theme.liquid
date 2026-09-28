@@ -3,13 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    
-    <title>Pastelería Belem | Repostería y Pan Tradicional en Durango</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Favicon forzado -->
-    <link rel="icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
-    <link rel="shortcut icon" type="image/png" href="{{ 'logo-belem.png' | asset_url }}">
-    <link rel="apple-touch-icon" href="{{ 'logo-belem.png' | asset_url }}">
+    {% # Título, Favicon, SEO y Redes Sociales unificados %}
+    {% render 'meta-tags' %}
 
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
@@ -22,16 +19,30 @@
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
 
-    {% # Social, title, etc. %}
-    {% render 'meta-tags' %}
-
     {{ content_for_header }}
+
+    <style>
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+      }
+      
+      #MainContent {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+    </style>
   </head>
 
   <body>
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
 
     {% sections 'footer-group' %}
   </body>

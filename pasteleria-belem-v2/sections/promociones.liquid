@@ -1,0 +1,315 @@
+<section class="belem-promos-section" id="seccion-promociones">
+  <div class="belem-promos-container">
+    
+    <!-- Barra con botón para volver al inicio -->
+    <div class="belem-back-home-bar">
+      <button type="button" class="belem-back-btn" onclick="switchToBelemView('home')">
+        ← Volver al Inicio
+      </button>
+    </div>
+
+    <div class="belem-promos-header">
+      <span class="belem-pill-badge">Ofertas & Paquetes Exclusivos</span>
+      <h2 class="belem-promos-title">Promociones de Temporada</h2>
+      <p class="belem-promos-subtitle">
+        Aprovecha nuestros paquetes especiales para cumpleaños, reuniones familiares y pedidos por volumen con el toque casero de siempre. Haz clic en cualquiera para ver los detalles.
+      </p>
+    </div>
+
+    <!-- Grid de Promociones -->
+    <div class="belem-promos-grid">
+
+      <!-- Promoción 1: Paquete Cumpleañero -->
+      <article class="promo-card highlight-card" onclick="openPromoModal(this)">
+        <div class="promo-badge-ribbon">Ahorra 15%</div>
+        <div class="promo-img-box">
+          <img src="{{ 'birthdayCake1.jpg' | asset_url }}" alt="Paquete Cumpleañero Belem" loading="lazy">
+        </div>
+        <div class="promo-content">
+          <span class="promo-tag">Combo Celebración</span>
+          <h3 class="promo-title">Paquete Cumpleañero Belem</h3>
+          <p class="promo-desc">Pastel mediano tradicional (a elegir) + 12 cupcakes decorados temáticos + velas artesanales de cortesía.</p>
+          <ul class="promo-benefits">
+            <li>✓ Ideal para 15 a 20 personas</li>
+            <li>✓ Dedicatoria personalizada incluida</li>
+            <li>✓ Pedido con 24 hrs de anticipación</li>
+          </ul>
+          <div class="promo-footer">
+            <span class="promo-note">Válido todo el mes</span>
+            <button type="button" class="btn-promo-details" onclick="event.stopPropagation(); openPromoModal(this.closest('.promo-card'))">
+              Ver Promoción
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Promoción 2: Docena Tradicional -->
+      <article class="promo-card" onclick="openPromoModal(this)">
+        <div class="promo-badge-ribbon">Especial del Horno</div>
+        <div class="promo-img-box">
+          <img src="{{ 'concha1.jpg' | asset_url }}" alt="Docena Tradicional" loading="lazy">
+        </div>
+        <div class="promo-content">
+          <span class="promo-tag">Panadería Local</span>
+          <h3 class="promo-title">Docena de Pan Tradicional</h3>
+          <p class="promo-desc">Elige entre conchas esponjosas, cochinitos de piloncillo y donas glaseadas recién horneadas con precio especial.</p>
+          <ul class="promo-benefits">
+            <li>✓ Combina hasta 4 variedades distintas</li>
+            <li>✓ Horneadas frescas dos veces al día</li>
+            <li>✓ Empacadas en caja sellada artesanal</li>
+          </ul>
+          <div class="promo-footer">
+            <span class="promo-note">Disponible diario</span>
+            <button type="button" class="btn-promo-details" onclick="event.stopPropagation(); openPromoModal(this.closest('.promo-card'))">
+              Ver Promoción
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Promoción 3: Mesa Dulce / Eventos -->
+      <article class="promo-card" onclick="openPromoModal(this)">
+        <div class="promo-badge-ribbon">Empresas & Fiestas</div>
+        <div class="promo-img-box">
+          <img src="{{ 'brownies1.jpg' | asset_url }}" alt="Combo Mesa de Postres" loading="lazy">
+        </div>
+        <div class="promo-content">
+          <span class="promo-tag">Repostería para Eventos</span>
+          <h3 class="promo-title">Combo Mesa Dulce (30 pzas)</h3>
+          <p class="promo-desc">Variado surtido de mini brownies fudge, galletas con chispas de chocolate y porciones individuales de pay de nuez.</p>
+          <ul class="promo-benefits">
+            <li>✓ Presentación lista para montaje de mesa</li>
+            <li>✓ Descuento por volumen en pedidos dobles</li>
+            <li>✓ Entrega programada puntual</li>
+          </ul>
+          <div class="promo-footer">
+            <span class="promo-note">Previa reservación</span>
+            <button type="button" class="btn-promo-details" onclick="event.stopPropagation(); openPromoModal(this.closest('.promo-card'))">
+              Ver Promoción
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Importación del snippet modal independiente de promociones -->
+{% render 'promo-modal' %}
+
+<style>
+  /* Por defecto, la sección de promociones está oculta */
+  #seccion-promociones {
+    display: none;
+    animation: fadeInView 0.35s ease forwards;
+    background: #ffffff;
+    padding: 20px 0 80px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Cuando se activa la vista de promociones */
+  body.view-promociones #seccion-promociones {
+    display: block;
+  }
+
+  /* Se oculta todo lo demás en la vista de promociones */
+  body.view-promociones .belem-hero-main,
+  body.view-promociones .belem-about-section,
+  body.view-promociones #menu-productos {
+    display: none !important;
+  }
+
+  .belem-promos-container {
+    width: 94%;
+    max-width: 1500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 16px;
+  }
+
+  .belem-promos-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 40px auto;
+  }
+
+  .belem-promos-title {
+    font-size: 2.6rem;
+    color: #3b141e;
+    font-weight: 800;
+    margin: 8px 0 10px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .belem-promos-subtitle {
+    font-size: 1.12rem;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Grid de Promociones */
+  .belem-promos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+
+  .promo-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 26px;
+    border: 1px solid #f3e6e8;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(74, 21, 37, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+  }
+
+  .promo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 42px rgba(74, 21, 37, 0.12);
+    border-color: #f8bbd0;
+  }
+
+  .highlight-card {
+    border: 2px solid #e91e63;
+  }
+
+  .promo-badge-ribbon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #d81b60;
+    color: #ffffff;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 5px 14px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.35);
+    z-index: 2;
+  }
+
+  .promo-img-box {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #fff4f6;
+  }
+
+  .promo-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .promo-card:hover .promo-img-box img {
+    transform: scale(1.05);
+  }
+
+  .promo-content {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .promo-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #ad1457;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .promo-title {
+    font-size: 1.35rem;
+    color: #3b141e;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+  }
+
+  .promo-desc {
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: #666;
+    margin: 0 0 16px 0;
+  }
+
+  .promo-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    font-size: 0.88rem;
+    color: #4a2830;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  .promo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #f6eaed;
+  }
+
+  .promo-note {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #666;
+  }
+
+  .btn-promo-details {
+    background: #d81b60;
+    color: #ffffff !important;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 9px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25);
+  }
+
+  .btn-promo-details:hover {
+    background: #ad1457;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(216, 27, 96, 0.35);
+  }
+
+  @media (max-width: 600px) {
+    .belem-promos-section {
+      padding: 30px 16px;
+    }
+    .belem-promos-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sección Promociones",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Sección Promociones"
+    }
+  ]
+}
+{% endschema %}

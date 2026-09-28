@@ -1,0 +1,156 @@
+<!-- VENTANA MODAL SUPERPUESTA DE DETALLES -->
+<div class="belem-modal-overlay" id="belemProductModal" onclick="closeProductModal(event)">
+  <div class="belem-modal-dialog" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+    <button type="button" class="belem-modal-close" onclick="closeProductModal()" aria-label="Cerrar ventana">✕</button>
+    
+    <div class="belem-modal-body">
+      <div class="belem-modal-media">
+        <img id="modalProductImg" src="" alt="Detalle del producto">
+        <span class="belem-modal-badge" id="modalProductBadge">Artesanal</span>
+      </div>
+
+      <div class="belem-modal-info">
+        <span class="belem-modal-tag" id="modalProductTag">Pastelería Belem</span>
+        <h3 class="belem-modal-title" id="modalProductTitle">Nombre del Producto</h3>
+        
+        <div class="belem-modal-prep-badge" id="modalProductPrep">Receta Tradicional</div>
+
+        <p class="belem-modal-desc" id="modalProductDesc"></p>
+        <p class="belem-modal-extra" id="modalProductExtra"></p>
+
+        <div class="belem-modal-meta-box">
+          <div class="meta-item">
+            <span class="meta-icon">📍</span>
+            <div>
+              <strong>Durango, Dgo.</strong>
+              <small>Elaborado localmente</small>
+            </div>
+          </div>
+          <div class="meta-item">
+            <span class="meta-icon">🍰</span>
+            <div>
+              <strong>Fresco del día</strong>
+              <small>Ingredientes naturales</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="belem-modal-actions">
+          <a href="#" target="_blank" class="btn-modal-whatsapp" id="modalProductWhatsappBtn">
+            Pedir este producto por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openProductModal(card) {
+    if (!card) return;
+
+    const img = card.querySelector('.product-img-box img')?.getAttribute('src') || '';
+    const badge = card.querySelector('.product-badge')?.textContent || 'Recomendado';
+    const tag = card.querySelector('.product-tag')?.textContent || 'Pastelería Belem';
+    const title = card.querySelector('.product-name')?.textContent || '';
+    const desc = card.querySelector('.product-desc')?.textContent || '';
+    const prep = card.querySelector('.m-prep')?.textContent || 'Elaborado artesanalmente';
+    const extra = card.querySelector('.m-extra')?.textContent || '';
+
+    document.getElementById('modalProductImg').src = img;
+    document.getElementById('modalProductImg').alt = title;
+    document.getElementById('modalProductBadge').textContent = badge;
+    document.getElementById('modalProductTag').textContent = tag;
+    document.getElementById('modalProductTitle').textContent = title;
+    document.getElementById('modalProductDesc').textContent = desc;
+    document.getElementById('modalProductPrep').textContent = prep;
+    document.getElementById('modalProductExtra').textContent = extra;
+
+    const phone = '526181891859';
+    const msg = encodeURIComponent(`Hola Pastelería Belem, me gustaría hacer un pedido de: ${title}. ¿Tienen disponibilidad hoy?`);
+    document.getElementById('modalProductWhatsappBtn').href = `https://wa.me/${phone}?text=${msg}`;
+
+    const modal = document.getElementById('belemProductModal');
+    modal.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProductModal(event) {
+    if (event && event.target && !event.target.classList.contains('belem-modal-overlay') && !event.target.classList.contains('belem-modal-close')) {
+      return;
+    }
+    const modal = document.getElementById('belemProductModal');
+    modal.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('belemProductModal');
+      if (modal && modal.classList.contains('is-active')) {
+        closeProductModal();
+      }
+    }
+  });
+</script>
+
+<style>
+  .belem-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(43, 14, 23, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999; display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px; box-sizing: border-box;
+  }
+
+  .belem-modal-overlay.is-active { opacity: 1; visibility: visible; }
+
+  .belem-modal-dialog {
+    position: relative; background: #ffffff; border-radius: 28px;
+    width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #fae1e6;
+  }
+
+  .belem-modal-overlay.is-active .belem-modal-dialog { transform: scale(1) translateY(0); }
+
+  .belem-modal-close {
+    position: absolute; top: 16px; right: 18px; width: 38px; height: 38px;
+    border-radius: 50%; background-color: #ffffff; border: 1px solid #f0d0d8;
+    color: #4a1525; font-size: 1.1rem; font-weight: 800; display: flex;
+    align-items: center; justify-content: center; cursor: pointer; z-index: 10;
+    transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .belem-modal-close:hover { background-color: #d81b60; color: #ffffff; border-color: #d81b60; transform: rotate(90deg); }
+  .belem-modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .belem-modal-media { position: relative; background-color: #fff0f3; min-height: 380px; overflow: hidden; }
+  .belem-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .belem-modal-badge { position: absolute; top: 18px; left: 18px; background: #d81b60; color: #ffffff; font-size: 0.75rem; font-weight: 800; padding: 5px 14px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35); }
+  .belem-modal-info { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; }
+  .belem-modal-tag { font-size: 0.8rem; text-transform: uppercase; color: #ad1457; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 6px; }
+  .belem-modal-title { font-size: 1.95rem; color: #3b141e; font-weight: 900; margin: 0 0 10px 0; line-height: 1.2; }
+  .belem-modal-prep-badge { display: inline-block; align-self: flex-start; background: #fdf2f4; color: #7d1234; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid #f8bbd0; margin-bottom: 16px; }
+  .belem-modal-desc { font-size: 0.98rem; line-height: 1.6; color: #444444; margin: 0 0 10px 0; }
+  .belem-modal-extra { font-size: 0.92rem; line-height: 1.55; color: #666666; margin: 0 0 20px 0; }
+  .belem-modal-meta-box { display: flex; gap: 20px; background: #fffafa; border: 1px solid #f8e6ea; border-radius: 16px; padding: 12px 16px; margin-bottom: 24px; }
+  .meta-item { display: flex; align-items: center; gap: 10px; }
+  .meta-icon { font-size: 1.3rem; }
+  .meta-item strong { display: block; font-size: 0.82rem; color: #3b141e; }
+  .meta-item small { font-size: 0.74rem; color: #777; }
+  .btn-modal-whatsapp { display: flex; align-items: center; justify-content: center; background: #25d366; color: #ffffff !important; font-weight: 800; font-size: 0.95rem; padding: 14px 24px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35); transition: all 0.25s ease; text-align: center; }
+  .btn-modal-whatsapp:hover { background-color: #1eb956; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45); }
+
+  @media (max-width: 768px) {
+    .belem-modal-body { grid-template-columns: 1fr; }
+    .belem-modal-media { min-height: 240px; max-height: 280px; }
+    .belem-modal-info { padding: 24px 20px; }
+    .belem-modal-title { font-size: 1.55rem; }
+    .belem-modal-meta-box { flex-direction: column; gap: 10px; }
+  }
+</style>

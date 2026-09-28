@@ -1,6 +1,13 @@
 <section class="belem-products-section" id="menu-productos">
   <div class="belem-products-container">
     
+    <!-- Barra con botón para volver al inicio -->
+    <div class="belem-back-home-bar">
+      <button type="button" class="belem-back-btn" onclick="switchToBelemView('home')">
+        ← Volver al Inicio
+      </button>
+    </div>
+
     <div class="belem-products-header">
       <span class="belem-pill-badge">Elaborados a Mano Diariamente</span>
       <h2 class="belem-products-title">Nuestras Especialidades</h2>
@@ -21,7 +28,7 @@
     <div class="belem-products-grid">
 
       <!-- 1. Pastel de Fresa Premium -->
-      <article class="product-card" data-category="pasteles">
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'pasteldefresapremium.jpeg' | asset_url }}" alt="Pastel de Fresa Premium" loading="lazy">
           <span class="product-badge">Favorito</span>
@@ -32,15 +39,19 @@
           <p class="product-desc">Pan esponjoso bañado en tres leches con abundante relleno de fresas frescas naturales y crema batida.</p>
           <div class="product-footer">
             <span class="product-label-status">Fresco del día</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pastel%20de%20Fresa%20Premium" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Preparación artesanal diaria</span>
+          <p class="m-extra">Elaborado con fruta fresca seleccionada. Nuestro tradicional baño tres leches infusionado con vainilla natural le aporta humedad y suavidad equilibrada.</p>
         </div>
       </article>
 
       <!-- 2. Pastel Alemán -->
-      <article class="product-card" data-category="pasteles">
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'PastelAleman1.jpeg' | asset_url }}" alt="Pastel Alemán" loading="lazy">
           <span class="product-badge">Clásico</span>
@@ -51,15 +62,19 @@
           <p class="product-desc">Exquisito pan de chocolate con la tradicional cubierta acaramelada de coco tostado y nuez pecana.</p>
           <div class="product-footer">
             <span class="product-label-status">Disponible</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pastel%20Alemán" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Receta tradicional</span>
+          <p class="m-extra">Cubierta elaborada a fuego lento con coco tostado, mantequilla y nuez pecana de primera calidad sobre bizcocho de chocolate intenso.</p>
         </div>
       </article>
 
       <!-- 3. Chocoflan -->
-      <article class="product-card" data-category="pasteles">
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'chocoflan1.jpg' | asset_url }}" alt="Chocoflan Artesanal" loading="lazy">
         </div>
@@ -69,15 +84,19 @@
           <p class="product-desc">La perfecta combinación de suave flan napolitano sobre una base húmeda de pastel de chocolate.</p>
           <div class="product-footer">
             <span class="product-label-status">Fresco del día</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Chocoflan" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Horneado al baño María</span>
+          <p class="m-extra">Flan tradicional bañado en caramelo dorado con base de pastel de chocolate suave horneados simultáneamente.</p>
         </div>
       </article>
 
       <!-- 4. Pastel Frutos Rojos -->
-      <article class="product-card" data-category="pasteles">
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'frutosrojoscake.jpeg' | asset_url }}" alt="Pastel de Frutos Rojos" loading="lazy">
         </div>
@@ -87,51 +106,63 @@
           <p class="product-desc">Decorado con fresas, frambuesas y moras sobre una capa de crema suave y pan de vainilla artesanal.</p>
           <div class="product-footer">
             <span class="product-label-status">Disponible</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pastel%20de%20Frutos%20Rojos" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Fruta natural seleccionada</span>
+          <p class="m-extra">Mezcla balanceada de frutos rojos sobre pan esponjoso de vainilla y crema batida suave.</p>
         </div>
       </article>
 
-      <!-- 5. Tiramisú Cake -->
-      <article class="product-card" data-category="pasteles">
+      <!-- 5. Pastel de Cumpleaños -->
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
         <div class="product-img-box">
-          <img src="{{ 'tiramisucake1.jpg' | asset_url }}" alt="Tiramisú Cake" loading="lazy">
+          <img src="{{ 'birthdayCake1.jpg' | asset_url }}" alt="Pastel de Celebración" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-tag">Celebración</span>
+          <h3 class="product-name">Pastel de Cumpleaños</h3>
+          <p class="product-desc">Diseñado para tus ocasiones especiales con betún artesanal y decoraciones personalizadas.</p>
+          <div class="product-footer">
+            <span class="product-label-status">Disponible</span>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
+          </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Personalizable bajo pedido</span>
+          <p class="m-extra">Elaborado con decoraciones personalizadas y leyenda a elección. Pregunta por las opciones de relleno disponibles.</p>
+        </div>
+      </article>
+
+      <!-- 6. Pastel para Bodas y Eventos -->
+      <article class="product-card" data-category="pasteles" onclick="openProductModal(this)">
+        <div class="product-img-box">
+          <img src="{{ 'bodacake.jpeg' | asset_url }}" alt="Pastel de Bodas y Eventos" loading="lazy">
         </div>
         <div class="product-details">
           <span class="product-tag">Especial</span>
-          <h3 class="product-name">Pastel Tiramisú</h3>
-          <p class="product-desc">Notas aromáticas de café, soletas embebidas y queso mascarpone espolvoreado con cacao fino.</p>
+          <h3 class="product-name">Pastel de Bodas y Eventos</h3>
+          <p class="product-desc">Diseños elegantes de pisos con acabados finos y la receta de mayor tradición de nuestra casa.</p>
           <div class="product-footer">
-            <span class="product-label-status">Disponible</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pastel%20Tiramisú" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <span class="product-label-status">Por pedido</span>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
         </div>
-      </article>
-
-      <!-- 6. Pastel de Zanahoria -->
-      <article class="product-card" data-category="pasteles">
-        <div class="product-img-box">
-          <img src="{{ 'zanahoriacake1.jpg' | asset_url }}" alt="Pastel de Zanahoria" loading="lazy">
-        </div>
-        <div class="product-details">
-          <span class="product-tag">Artesanal</span>
-          <h3 class="product-name">Pastel de Zanahoria</h3>
-          <p class="product-desc">Pan especiado con canela, nuez, zanahoria fresca rallada y betún cremoso de queso crema.</p>
-          <div class="product-footer">
-            <span class="product-label-status">Fresco del día</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pastel%20de%20Zanahoria" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
-          </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Cotización con anticipación</span>
+          <p class="m-extra">Diseño y asesoría integral en pisos, acabados de cobertura y sabores para celebraciones grandes y recepciones.</p>
         </div>
       </article>
 
       <!-- 7. Conchas Tradicionales -->
-      <article class="product-card" data-category="pan">
+      <article class="product-card" data-category="pan" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'concha1.jpg' | asset_url }}" alt="Conchas Tradicionales" loading="lazy">
           <span class="product-badge">Horneado Diario</span>
@@ -142,15 +173,19 @@
           <p class="product-desc">Suaves, esponjosas y recién salidas del horno con cobertura dulce clásica de vainilla o chocolate.</p>
           <div class="product-footer">
             <span class="product-label-status">Recién horneado</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20pedir%20Conchas%20Tradicionales" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Hornadas mañana y tarde</span>
+          <p class="m-extra">Elaboradas con mantequilla seleccionada y fermentación reposada para garantizar una miga esponjosa y ligera.</p>
         </div>
       </article>
 
       <!-- 8. Cochinitos de Piloncillo -->
-      <article class="product-card" data-category="pan">
+      <article class="product-card" data-category="pan" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'cochinito1.jpg' | asset_url }}" alt="Cochinitos de Piloncillo" loading="lazy">
         </div>
@@ -160,51 +195,63 @@
           <p class="product-desc">Pan artesanal preparado con piloncillo puro y un toque de especias; la tradición duranguense.</p>
           <div class="product-footer">
             <span class="product-label-status">Tradicional</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20pedir%20Cochinitos" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Receta tradicional</span>
+          <p class="m-extra">Masa especiada con melaza de piloncillo regional y canela molida, horneada a textura firme y suave al centro.</p>
         </div>
       </article>
 
-      <!-- 9. Roles de Canela -->
-      <article class="product-card" data-category="pan">
+      <!-- 9. Donas Caseras -->
+      <article class="product-card" data-category="pan" onclick="openProductModal(this)">
         <div class="product-img-box">
-          <img src="{{ 'rolcanela1.jpg' | asset_url }}" alt="Roles de Canela" loading="lazy">
+          <img src="{{ 'donuts1.jpg' | asset_url }}" alt="Donas Artesanales" loading="lazy">
         </div>
         <div class="product-details">
           <span class="product-tag">Pan Dulce</span>
-          <h3 class="product-name">Rol de Canela Casero</h3>
-          <p class="product-desc">Masa tierna enrollada con abundante canela aromática, azúcar morena y glaseado suave.</p>
+          <h3 class="product-name">Donas Glaseadas y Canela</h3>
+          <p class="product-desc">Suaves y esponjosas, cubiertas con glaseado tradicional de azúcar, chocolate o canela fresca.</p>
           <div class="product-footer">
             <span class="product-label-status">Fresco del día</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20pedir%20Roles%20de%20Canela" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Preparadas a diario</span>
+          <p class="m-extra">Masa ligera de levadura con fritura limpia a temperatura controlada y coberturas de chocolate, azúcar o glaseado fino.</p>
         </div>
       </article>
 
-      <!-- 10. Polvorones y Galletas -->
-      <article class="product-card" data-category="pan">
+      <!-- 10. Galletas con Chispas -->
+      <article class="product-card" data-category="pan" onclick="openProductModal(this)">
         <div class="product-img-box">
-          <img src="{{ 'polvoron1.jpg' | asset_url }}" alt="Polvorones Caseros" loading="lazy">
+          <img src="{{ 'chipscookies1.jpg' | asset_url }}" alt="Galletas con Chispas" loading="lazy">
         </div>
         <div class="product-details">
           <span class="product-tag">Horno Artesanal</span>
-          <h3 class="product-name">Polvorones Tradicionales</h3>
-          <p class="product-desc">Textura que se deshace en tu boca, elaborados con recetas familiares que conservan su autenticidad.</p>
+          <h3 class="product-name">Galletas con Chispas</h3>
+          <p class="product-desc">Doradas por fuera, suaves por dentro y con generosas chispas de chocolate semi-amargo.</p>
           <div class="product-footer">
             <span class="product-label-status">Disponible</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20pedir%20Polvorones" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Mantequilla y chocolate</span>
+          <p class="m-extra">Receta con mantequilla pura y abundantes perlas de chocolate semiamargo que conservan suavidad en el centro.</p>
         </div>
       </article>
 
       <!-- 11. Pay de Nuez -->
-      <article class="product-card" data-category="reposteria">
+      <article class="product-card" data-category="reposteria" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'paydenuez.jpeg' | asset_url }}" alt="Pay de Nuez" loading="lazy">
           <span class="product-badge">Especialidad</span>
@@ -215,15 +262,19 @@
           <p class="product-desc">Costra crujiente de mantequilla rellena con miel dulce y generosa nuez tostada de la región.</p>
           <div class="product-footer">
             <span class="product-label-status">Recomendado</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20ordenar%20el%20Pay%20de%20Nuez" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Especialidad de la casa</span>
+          <p class="m-extra">Una de las recetas distintivas de Pastelería Belem desde 1998. Masa quebrada a mano rellena de nuez tostada y caramelo artesanal.</p>
         </div>
       </article>
 
       <!-- 12. Brownies de Chocolate -->
-      <article class="product-card" data-category="reposteria">
+      <article class="product-card" data-category="reposteria" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'brownies1.jpg' | asset_url }}" alt="Brownies" loading="lazy">
         </div>
@@ -233,15 +284,19 @@
           <p class="product-desc">Textura suave y densa (*fudgy*), elaborados con cacao de primera calidad y chispas de chocolate.</p>
           <div class="product-footer">
             <span class="product-label-status">Disponible</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20pedir%20Brownies" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Intenso en chocolate</span>
+          <p class="m-extra">Elaborados con cacao tostado, corteza craquelada y centro húmedo con chispas de chocolate derretidas.</p>
         </div>
       </article>
 
-      <!-- 13. Macarons y Cupcakes -->
-      <article class="product-card" data-category="reposteria">
+      <!-- 13. Cupcakes Decorados -->
+      <article class="product-card" data-category="reposteria" onclick="openProductModal(this)">
         <div class="product-img-box">
           <img src="{{ 'cupcakes1.jpg' | asset_url }}" alt="Cupcakes Artesanales" loading="lazy">
         </div>
@@ -251,10 +306,14 @@
           <p class="product-desc">Porciones individuales ideales para eventos, cumpleaños y reuniones especiales.</p>
           <div class="product-footer">
             <span class="product-label-status">Por pedido</span>
-            <a href="https://wa.me/526181891859?text=Hola%20Pastelería%20Belem,%20me%20gustaría%20cotizar%20Cupcakes" target="_blank" class="btn-order-card">
-              Pedir
-            </a>
+            <button type="button" class="btn-detail-card" onclick="event.stopPropagation(); openProductModal(this.closest('.product-card'))">
+              Ver detalles
+            </button>
           </div>
+        </div>
+        <div class="product-modal-data" style="display:none;">
+          <span class="m-prep">Ideales para celebraciones</span>
+          <p class="m-extra">Panqués esponjosos decorados individualmente con combinaciones personalizadas para eventos.</p>
         </div>
       </article>
 
@@ -262,7 +321,11 @@
   </div>
 </section>
 
+<!-- Importación del snippet modal independiente -->
+{% render 'product-modal' %}
+
 <script>
+  /* Función para filtrar tarjetas por categoría */
   function filterProducts(category, btn) {
     const cards = document.querySelectorAll('.product-card');
     const buttons = document.querySelectorAll('.filter-btn');
@@ -278,19 +341,121 @@
       }
     });
   }
+
+  /* Controlador SPA multiventana */
+  window.switchToBelemView = function(view) {
+    document.body.classList.remove('view-especialidades', 'view-promociones');
+
+    if (view === 'especialidades') {
+      document.body.classList.add('view-especialidades');
+      window.location.hash = 'especialidades';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (view === 'promociones') {
+      document.body.classList.add('view-promociones');
+      window.location.hash = 'promociones';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      history.pushState("", document.title, window.location.pathname + window.location.search);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Escuchar enlaces hacia Especialidades
+    document.querySelectorAll('a[href="#especialidades"], a[href="#menu-productos"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.switchToBelemView('especialidades');
+      });
+    });
+
+    // Escuchar enlaces hacia Promociones
+    document.querySelectorAll('a[href="#promociones"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.switchToBelemView('promociones');
+      });
+    });
+
+    // Detectar si carga con hash en la URL
+    if (window.location.hash === '#especialidades') {
+      window.switchToBelemView('especialidades');
+    } else if (window.location.hash === '#promociones') {
+      window.switchToBelemView('promociones');
+    }
+  });
 </script>
 
 <style>
-.belem-products-section {
-    background: #ffffff; /* Mismo fondo */
-    padding: 30px 24px 80px 24px; /* Bajamos el padding-top de 85px a solo 30px */
+  /* Por defecto en la página de inicio, la sección de productos no se muestra al dar scroll */
+  #menu-productos {
+    display: none;
+    animation: fadeInView 0.35s ease forwards;
+  }
+
+  /* Cuando el usuario activa la vista de especialidades, se muestra el catálogo */
+  body.view-especialidades #menu-productos {
+    display: block;
+  }
+
+  /* Se ocultan el Hero y Quiénes Somos para mostrar únicamente la vitrina */
+  body.view-especialidades .belem-hero-main,
+  body.view-especialidades .belem-about-section {
+    display: none !important;
+  }
+
+  /* Barra de botón volver alineada al ancho del contenedor */
+  .belem-back-home-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px 0 20px 0;
+    box-sizing: border-box;
+  }
+
+  .belem-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff4f6;
+    color: #7d1234;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 10px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1px solid #f8bbd0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .belem-back-btn:hover {
+    background-color: #7d1234;
+    color: #ffffff;
+    border-color: #7d1234;
+    transform: translateX(-3px);
+  }
+
+  @keyframes fadeInView {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .belem-products-section {
+    background: #ffffff;
+    padding: 20px 0 80px 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .belem-products-container {
-    width: 100%;
-    max-width: 1300px;
+    width: 94%;
+    max-width: 1500px;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .belem-products-header {
@@ -299,11 +464,25 @@
     margin: 0 auto 40px auto;
   }
 
+  .belem-pill-badge {
+    display: inline-block;
+    background-color: #fff0f3;
+    color: #ad1457;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+    border: 1px solid #f8bbd0;
+  }
+
   .belem-products-title {
     font-size: 2.6rem;
     color: #3b141e;
     font-weight: 800;
-    margin: 12px 0 10px 0;
+    margin: 8px 0 10px 0;
     letter-spacing: -0.5px;
   }
 
@@ -364,6 +543,7 @@
     flex-direction: column;
     box-shadow: 0 8px 24px rgba(74, 21, 37, 0.04);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
   }
 
   .product-card:hover {
@@ -458,27 +638,29 @@
     border-radius: 8px;
   }
 
-  .btn-order-card {
-    background: #d81b60;
-    color: #ffffff !important;
-    text-decoration: none;
+  .btn-detail-card {
+    background: #fff0f3;
+    color: #ad1457;
+    border: 1px solid #f8bbd0;
     font-weight: 700;
-    font-size: 0.88rem;
-    padding: 8px 20px;
+    font-size: 0.86rem;
+    padding: 7px 18px;
     border-radius: 50px;
+    cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.2);
   }
 
-  .btn-order-card:hover {
-    background: #ad1457;
+  .btn-detail-card:hover {
+    background: #d81b60;
+    color: #ffffff;
+    border-color: #d81b60;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(216, 27, 96, 0.35);
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25);
   }
 
   @media (max-width: 600px) {
     .belem-products-section {
-      padding: 50px 16px;
+      padding: 30px 16px;
     }
     .belem-products-title {
       font-size: 2rem;

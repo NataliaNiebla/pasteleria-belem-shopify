@@ -1,5 +1,9 @@
 {
   "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {}
+    },
     "about_us": {
       "type": "about-us",
       "settings": {}
@@ -8,14 +12,20 @@
       "type": "featured-products",
       "settings": {}
     },
+    "promociones_section": {
+      "type": "promociones",
+      "settings": {}
+    },
     "contact_section": {
       "type": "contact-card",
       "settings": {}
     }
   },
   "order": [
+    "hero_banner",
     "about_us",
     "products_catalog",
+    "promociones_section",
     "contact_section"
   ]
 }

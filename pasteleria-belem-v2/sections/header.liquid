@@ -2,7 +2,7 @@
   <div class="belem-header-container">
     
     <!-- Logo e Identidad -->
-    <a href="{{ routes.root_url }}" class="header__logo-link">
+    <a href="{{ routes.root_url }}" class="header__logo-link" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
       <img 
         src="{{ 'logo-belem.png' | asset_url }}" 
         alt="Pastelería Belem" 
@@ -16,13 +16,16 @@
 
     <!-- Barra de Navegación con Botones / Píldoras -->
     <nav class="header__nav" aria-label="Navegación principal">
-      <a href="#quienes-somos" class="header__nav-btn">
+      <a href="#quienes-somos" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
         <span>Quiénes Somos</span>
       </a>
-      <a href="#menu-productos" class="header__nav-btn">
+      <a href="#especialidades" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('especialidades'); }">
         <span>Especialidades</span>
       </a>
-      <a href="#contacto" class="header__nav-btn">
+      <a href="#promociones" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('promociones'); }">
+        <span>Promociones</span>
+      </a>
+      <a href="#contacto" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
         <span>Contacto</span>
       </a>
     </nav>
@@ -121,6 +124,7 @@
     transition: all 0.22s ease;
     display: inline-flex;
     align-items: center;
+    cursor: pointer;
   }
 
   .header__nav-btn:hover {

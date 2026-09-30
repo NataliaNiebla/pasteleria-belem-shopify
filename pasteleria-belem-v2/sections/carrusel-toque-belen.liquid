@@ -1,0 +1,490 @@
+{% schema %}
+{
+  "name": "El Toque Belen",
+  "settings": [],
+  "presets": [
+    {
+      "name": "El Toque Belen"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="belen-interactive-wrapper" id="experienciaHomeBelen">
+  <div class="belen-section-header">
+    <span class="belen-badge">El Toque Belén</span>
+    <h2>Experiencias y Celebraciones Inolvidables</h2>
+    <p>Desliza para explorar nuestras especialidades, guía interactiva y colaboraciones locales</p>
+  </div>
+
+  <div class="belen-carousel-outer">
+    <button type="button" class="carousel-nav-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+
+    <div class="belen-carousel-container">
+      
+      <!-- SLIDE 1: MOMENTOS Y CELEBRACIONES -->
+      <div class="belen-slide active">
+        <div class="belen-card card-visual">
+          <div class="card-tag">Momentos Inolvidables</div>
+          <h3>Celebraciones con Sabor Artesanal</h3>
+          <p class="card-desc">Fotografías reales de nuestros pasteles en los eventos más importantes de Durango:</p>
+
+          <div class="celebraciones-grid">
+            <div class="celebracion-item">
+              <div class="img-frame">
+                <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80" alt="Pastel de Boda" loading="lazy">
+                <span class="photo-label">Bodas & XV Años</span>
+              </div>
+            </div>
+
+            <div class="celebracion-item">
+              <div class="img-frame">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Pastel de Cumpleaños" loading="lazy">
+                <span class="photo-label">Cumpleaños Especiales</span>
+              </div>
+            </div>
+
+            <div class="celebracion-item">
+              <div class="img-frame">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" alt="Mesa de Postres" loading="lazy">
+                <span class="photo-label">Reuniones e Íntimos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: POR QUÉ ELEGIRNOS -->
+      <div class="belen-slide">
+        <div class="belen-card card-confianza">
+          <div class="card-tag">Garantía Belén</div>
+          <h3>¿Por qué elegir Pastelería Belén?</h3>
+          <p class="card-desc">Horneamos diariamente con la tradición y el cariño que respaldan a las familias duranguenses desde 1998.</p>
+
+          <div class="frescura-pillars">
+            <div class="pillar-box">
+              <div class="pillar-icon">🍓</div>
+              <h4>100% Fresco</h4>
+              <p>Horneado el mismo día de tu entrega, sin conservadores ni congelados.</p>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">✨</div>
+              <h4>Tradición de Casa</h4>
+              <p>Recetas artesanales perfeccionadas para darte el sabor icónico inolvidable.</p>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">👑</div>
+              <h4>Ingredientes Calidad VIP</h4>
+              <p>Mantequilla pura, frutas frescas y chocolates de alta repostería.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: MINI GUÍA INTERACTIVA -->
+      <div class="belen-slide">
+        <div class="belen-card card-guia">
+          <div class="card-tag">Mini Guía Interactiva</div>
+          <h3>Encuentra tu Pastel Ideal</h3>
+          <p class="card-desc">Haz clic en el tipo de evento para conocer la recomendación perfecta de porciones y acabado:</p>
+
+          <div class="guia-selector-nav">
+            <button type="button" class="mini-tab active" onclick="verGuia('boda', this)">💍 Bodas / XV</button>
+            <button type="button" class="mini-tab" onclick="verGuia('cumple', this)">🎂 Cumpleaños</button>
+            <button type="button" class="mini-tab" onclick="verGuia('reunion', this)">☕ Reunión Familiar</button>
+          </div>
+
+          <div class="guia-display-box" id="guiaDisplayBox">
+            <div class="guia-content-inner">
+              <span class="guia-highlight">Especialidad Recomendada:</span>
+              <p>Pasteles de 3 a 5 pisos con acabados elegantes, flores naturales y degustación previa para elegir los rellenos más finos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: COLABORACIONES LOCALES -->
+      <div class="belen-slide">
+        <div class="belen-card card-colab">
+          <div class="card-tag">Aliados Locales</div>
+          <h3>Colaboraciones con Marcas Locales</h3>
+          <p class="card-desc">Trabajamos en equipo con los mejores decoradores, floristas y salones de Durango para que tu evento luzca espectacular.</p>
+
+          <div class="colab-features">
+            <div class="colab-chip">
+              <span>🌸 Floristas Locales</span>
+              <small>Arreglos florales comestibles y decoración fresca</small>
+            </div>
+            <div class="colab-chip">
+              <span>🎈 Decoradores & Salones</span>
+              <small>Coordinación de colores y paletas para la mesa de dulces</small>
+            </div>
+            <div class="colab-chip">
+              <span>📸 Fotografía & Estilo</span>
+              <small>Diseños fotogénicos para que destaquen en tus recuerdos</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button type="button" class="carousel-nav-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
+  </div>
+
+  <div class="carousel-dots-bar">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+  </div>
+</div>
+
+<style>
+  .belen-interactive-wrapper {
+    background: linear-gradient(180deg, #fff2f5 0%, #ffffff 100%);
+    padding: 60px 20px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+  }
+
+  .belen-badge {
+    display: inline-block;
+    background: #ffffff;
+    color: #d81b60;
+    border: 1.5px solid #f8bbd0;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+  }
+
+  .belen-section-header h2 {
+    font-size: 28px;
+    color: #3b141e;
+    margin: 0 0 8px 0;
+    font-weight: 800;
+  }
+
+  .belen-section-header p {
+    font-size: 15px;
+    color: #666666;
+    margin: 0 0 35px 0;
+  }
+
+  .belen-carousel-outer {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .belen-carousel-container {
+    width: 100%;
+    min-height: 380px;
+    position: relative;
+  }
+
+  .belen-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .belen-slide.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .belen-card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 38px 32px;
+    border: 2px solid #f8bbd0;
+    box-shadow: 0 14px 35px rgba(216, 27, 96, 0.08);
+    text-align: left;
+  }
+
+  .card-tag {
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #d81b60;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .belen-card h3 {
+    font-size: 24px;
+    color: #3b141e;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+  }
+
+  .card-desc {
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+  }
+
+  .celebraciones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .celebracion-item .img-frame {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 180px;
+    border: 1px solid #f8bbd0;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    background-color: #fff2f5;
+  }
+
+  .celebracion-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .celebracion-item:hover img {
+    transform: scale(1.08);
+  }
+
+  .photo-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(59, 20, 30, 0.85) 100%);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 15px 10px 8px 10px;
+    text-align: center;
+  }
+
+  .frescura-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .pillar-box {
+    background: #fff2f5;
+    border-radius: 18px;
+    padding: 20px 15px;
+    border: 1px solid #f8bbd0;
+    text-align: center;
+  }
+
+  .pillar-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .pillar-box h4 {
+    font-size: 15px;
+    color: #3b141e;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+  }
+
+  .pillar-box p {
+    font-size: 12.5px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .guia-selector-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .mini-tab {
+    background: #f5f5f5;
+    border: 1.5px solid #e0e0e0;
+    color: #444444;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .mini-tab.active, .mini-tab:hover {
+    background: #d81b60;
+    color: #ffffff;
+    border-color: #d81b60;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25);
+  }
+
+  .guia-display-box {
+    background: #fff2f5;
+    border-left: 5px solid #d81b60;
+    padding: 18px 22px;
+    border-radius: 12px;
+  }
+
+  .guia-highlight {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: #d81b60;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .guia-display-box p {
+    font-size: 14px;
+    color: #3b141e;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .colab-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .colab-chip {
+    background: #fff2f5;
+    border-radius: 14px;
+    padding: 14px 18px;
+    border: 1px solid #f8bbd0;
+  }
+
+  .colab-chip span {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b141e;
+  }
+
+  .colab-chip small {
+    font-size: 12.5px;
+    color: #666666;
+  }
+
+  .carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border: 2px solid #f8bbd0;
+    color: #d81b60;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+  }
+
+  .carousel-nav-btn:hover {
+    background: #d81b60;
+    color: #ffffff;
+  }
+
+  .carousel-nav-btn.prev { left: -22px; }
+  .carousel-nav-btn.next { right: -22px; }
+
+  .carousel-dots-bar {
+    margin-top: 25px;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #f8bbd0;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: #d81b60;
+    width: 28px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .celebraciones-grid, .frescura-pillars {
+      grid-template-columns: 1fr;
+    }
+    .carousel-nav-btn.prev { left: 0px; }
+    .carousel-nav-btn.next { right: 0px; }
+    .belen-card { padding: 25px 20px; }
+    .celebracion-item .img-frame { height: 200px; }
+  }
+</style>
+
+<script>
+  let slideIndex = 0;
+  let autoSlideTimer;
+
+  function showSlide(n) {
+    const slides = document.querySelectorAll('#experienciaHomeBelen .belen-slide');
+    const dots = document.querySelectorAll('#experienciaHomeBelen .dot');
+    if (!slides.length) return;
+
+    if (n >= slides.length) slideIndex = 0;
+    else if (n < 0) slideIndex = slides.length - 1;
+    else slideIndex = n;
+
+    slides.forEach((s, i) => s.classList.toggle('active', i === slideIndex));
+    dots.forEach((d, i) => d.classList.toggle('active', i === slideIndex));
+  }
+
+  function moveSlide(n) {
+    showSlide(slideIndex + n);
+    resetAutoSlide();
+  }
+
+  function goToSlide(n) {
+    showSlide(slideIndex = n);
+    resetAutoSlide();
+  }
+
+  function verGuia(tipo, btn) {
+    const display = document.getElementById('guiaDisplayBox');
+    const tabs = document.querySelectorAll('.mini-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    if (tipo === 'boda') {
+      display.innerHTML = '<div class="guia-content-inner"><span class="guia-highlight">Especialidad Recomendada:</span><p>Pasteles de 3 a 5 pisos con acabados elegantes, flores naturales y degustación previa para elegir los rellenos más finos.</p></div>';
+    } else if (tipo === 'cumple') {
+      display.innerHTML = '<div class="guia-content-inner"><span class="guia-highlight">Especialidad Recomendada:</span><p>Diseños temáticos llenos de color, cobertura suave o fondant, personalizados con el tema y porciones para tus invitados.</p></div>';
+    } else if (tipo === 'reunion') {
+      display.innerHTML = '<div class="guia-content-inner"><span class="guia-highlight">Especialidad Recomendada:</span><p>Pasteles tradicionales de 1 o 2 pisos (Chocoflan, Tres Leches, Red Velvet), perfectos para compartir un momento dulce en familia.</p></div>';
+    }
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(() => { showSlide(slideIndex + 1); }, 6000);
+  }
+
+  autoSlideTimer = setInterval(() => { showSlide(slideIndex + 1); }, 6000);
+</script>

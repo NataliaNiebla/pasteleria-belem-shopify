@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
@@ -12,20 +21,26 @@
       "type": "featured-products",
       "settings": {}
     },
-    "promociones_section": {
-      "type": "promociones",
+    "featured_products_rKEg6r": {
+      "type": "featured-products",
       "settings": {}
     },
     "contact_section": {
       "type": "contact-card",
       "settings": {}
+    },
+    "carrusel_toque_belen_V4BxcG": {
+      "type": "carrusel-toque-belen",
+      "name": "Carrusel El Toque Belen",
+      "settings": {}
     }
   },
   "order": [
     "hero_banner",
+    "carrusel_toque_belen_V4BxcG",
     "about_us",
     "products_catalog",
-    "promociones_section",
+    "featured_products_rKEg6r",
     "contact_section"
   ]
 }

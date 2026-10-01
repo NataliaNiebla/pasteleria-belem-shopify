@@ -47,21 +47,55 @@
         padding: 0 !important;
       }
 
-      /* Reglas SPA: Ocultar secciones del Home en Especialidades y Promociones */
-      body.view-especialidades [id*="carrusel-toque-belen"],
-      body.view-especialidades [id*="experiencia-home-belen"],
-      body.view-especialidades .belem-carrusel-section,
-      body.view-especialidades .belem-experiencia-section,
-      body.view-promociones [id*="carrusel-toque-belen"],
-      body.view-promociones [id*="experiencia-home-belen"],
-      body.view-promociones .belem-carrusel-section,
-      body.view-promociones .belem-experiencia-section {
+          /* ===================================================
+        ESTILOS SPA - VISTAS / PESTAÑAS
+        =================================================== */
+
+      /* Vista: Quiénes Somos (Default) */
+      body:not([class*="view-"]) [id*="products_catalog"],
+      body:not([class*="view-"]) [id*="contact_section"],
+      body:not([class*="view-"]) [id*="experienciaHomeBelem"],
+      body:not([class*="view-"]) [id*="carrusel_toque_belem"],
+      body.view-quienes-somos [id*="products_catalog"],
+      body.view-quienes-somos [id*="contact_section"],
+      body.view-quienes-somos [id*="experienciaHomeBelem"],
+      body.view-quienes-somos [id*="carrusel_toque_belem"],
+      body.view-quienes-somos [id*="promociones_section"] {
+        display: none !important;
+      }
+
+      /* Vista: El Toque Belem  */
+      body.view-toque-belem [id*="hero_banner"],
+      body.view-toque-belem [id*="about_us"],
+      body.view-toque-belem [id*="products_catalog"],
+      body.view-toque-belem [id*="contact_section"],
+      body.view-toque-belem [id*="promociones_section"] {
+        display: none !important;
+      }
+
+      /* Vista: Especialidades */
+      body.view-especialidades [id*="hero_banner"],
+      body.view-especialidades [id*="carrusel_toque_belem"],
+      body.view-especialidades [id*="experienciaHomeBelem"],
+      body.view-especialidades [id*="about_us"],
+      body.view-especialidades [id*="contact_section"],
+      body.view-especialidades [id*="promociones_section"] {
+        display: none !important;
+      }
+
+      /* Vista: Contacto */
+      body.view-contacto [id*="hero_banner"],
+      body.view-contacto [id*="carrusel_toque_belem"],
+      body.view-contacto [id*="experienciaHomeBelem"],
+      body.view-contacto [id*="about_us"],
+      body.view-contacto [id*="products_catalog"],
+      body.view-contacto [id*="promociones_section"] {
         display: none !important;
       }
     </style>
   </head>
 
-  <body>
+  <body class="view-quienes-somos">
     {% sections 'header-group' %}
 
     <main id="MainContent" role="main" tabindex="-1">
@@ -69,5 +103,27 @@
     </main>
 
     {% sections 'footer-group' %}
+
+    <script>
+      function switchToBelemView(viewName) {
+        // Remover clases de vistas anteriores
+        document.body.classList.remove(
+          'view-quienes-somos', 
+          'view-toque-belem',
+          'view-especialidades', 
+          'view-contacto', 
+          'view-home');
+        
+        // Asignar nueva vista
+        if (viewName === 'home') {
+          document.body.classList.add('view-quienes-somos');
+        } else {
+          document.body.classList.add('view-' + viewName);
+        }
+
+        // Scroll suave al inicio del contenido
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    </script>
   </body>
 </html>

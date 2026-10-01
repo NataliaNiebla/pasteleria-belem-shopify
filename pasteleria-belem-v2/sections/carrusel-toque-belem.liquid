@@ -143,19 +143,9 @@
 </div>
 
 <style>
-  /* Bloqueo SPA directo: Oculta el contenedor nativo y el elemento en Especialidades y Promociones */
-  body.view-especialidades #shopify-section-{{ section.id }},
-  body.view-promociones #shopify-section-{{ section.id }},
-  body.view-especialidades #experienciaHomeBelen,
-  body.view-promociones #experienciaHomeBelen,
-  body.view-especialidades .belen-interactive-wrapper,
-  body.view-promociones .belen-interactive-wrapper {
-    display: none !important;
-  }
-
   .belen-interactive-wrapper {
     background: linear-gradient(180deg, #fff2f5 0%, #ffffff 100%) !important;
-    padding: 60px 0 !important; /* Quitamos el padding lateral para que el fondo toque los bordes */
+    padding: 60px 0 !important;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
     width: 100vw !important;
@@ -217,13 +207,13 @@
     width: 100%;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(30px); /* Empieza ligeramente desplazado a la derecha */
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transición suave y moderna */
+    transform: translateX(30px);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
   }
 
   .belen-slide.active {
-    position: relative; /* El slide activo toma su espacio normal */
+    position: relative;
     opacity: 1;
     visibility: visible;
     transform: translateX(0);

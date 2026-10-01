@@ -14,15 +14,40 @@
       <span class="header__brand-name">Pastelería Belem</span>
     </a>
 
-    <!-- Barra de Navegación con Botones / Píldoras -->
+   <!-- Barra de Navegación con Botones / Píldoras -->
+  <!-- Barra de Navegación con Botones / Píldoras -->
     <nav class="header__nav" aria-label="Navegación principal">
-      <a href="#quienes-somos" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
+      <a 
+        href="javascript:void(0)" 
+        class="header__nav-btn" 
+        onclick="switchToBelemView('quienes-somos')"
+      >
         <span>Quiénes Somos</span>
       </a>
-      <a href="#especialidades" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('especialidades'); }">
+
+      <!-- Correcto: Pasa 'toque-belem' y muestra "El Toque Belem" -->
+      <a 
+        href="javascript:void(0)" 
+        class="header__nav-btn" 
+        onclick="switchToBelemView('toque-belem')"
+      >
+        <span>El Toque Belem</span>
+      </a>
+
+      <!-- Correcto: Pasa 'especialidades' y muestra "Especialidades" -->
+      <a 
+        href="javascript:void(0)" 
+        class="header__nav-btn" 
+        onclick="switchToBelemView('especialidades')"
+      >
         <span>Especialidades</span>
       </a>
-      <a href="#contacto" class="header__nav-btn" onclick="if(window.switchToBelemView){ switchToBelemView('home'); }">
+
+      <a 
+        href="javascript:void(0)" 
+        class="header__nav-btn" 
+        onclick="switchToBelemView('contacto')"
+      >
         <span>Contacto</span>
       </a>
     </nav>

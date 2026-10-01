@@ -4,9 +4,9 @@
       "type": "hero-banner",
       "settings": {}
     },
-    "carrusel_toque_belen_V4BxcG": {
-      "type": "carrusel-toque-belen",
-      "name": "Carrusel El Toque Belen",
+    "carrusel_toque_belem_V4BxcG": {
+      "type": "carrusel-toque-belem",
+      "name": "Carrusel El Toque Belem",
       "settings": {}
     },
     "about_us": {
@@ -28,7 +28,7 @@
   },
   "order": [
     "hero_banner",
-    "carrusel_toque_belen_V4BxcG",
+    "carrusel_toque_belem_V4BxcG",
     "about_us",
     "products_catalog",
     "promociones_section",

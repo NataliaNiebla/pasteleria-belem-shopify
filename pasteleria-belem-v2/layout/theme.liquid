@@ -45,7 +45,19 @@
         max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
-  }
+      }
+
+      /* Reglas SPA: Ocultar secciones del Home en Especialidades y Promociones */
+      body.view-especialidades [id*="carrusel-toque-belen"],
+      body.view-especialidades [id*="experiencia-home-belen"],
+      body.view-especialidades .belem-carrusel-section,
+      body.view-especialidades .belem-experiencia-section,
+      body.view-promociones [id*="carrusel-toque-belen"],
+      body.view-promociones [id*="experiencia-home-belen"],
+      body.view-promociones .belem-carrusel-section,
+      body.view-promociones .belem-experiencia-section {
+        display: none !important;
+      }
     </style>
   </head>
 

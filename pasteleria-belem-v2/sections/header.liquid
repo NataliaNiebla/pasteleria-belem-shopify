@@ -14,9 +14,18 @@
       <span class="header__brand-name">Pastelería Belem</span>
     </a>
 
-   <!-- Barra de Navegación con Botones / Píldoras -->
   <!-- Barra de Navegación con Botones / Píldoras -->
     <nav class="header__nav" aria-label="Navegación principal">
+    <!-- Botón de Inicio -->
+      <a 
+        href="javascript:void(0)" 
+        class="header__nav-btn" 
+        onclick="switchToBelemView('home')"
+      >
+        <span>Inicio</span>
+      </a>
+
+      <!-- Botón de Quiénes Somos -->
       <a 
         href="javascript:void(0)" 
         class="header__nav-btn" 
@@ -25,7 +34,7 @@
         <span>Quiénes Somos</span>
       </a>
 
-      <!-- Correcto: Pasa 'toque-belem' y muestra "El Toque Belem" -->
+      <!-- "El Toque Belem" -->
       <a 
         href="javascript:void(0)" 
         class="header__nav-btn" 
